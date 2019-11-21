@@ -7,11 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Security.Cryptography;
 
 namespace FrbaOfertas
 {
     public partial class Login : Form
     {
+        Conexion con = new Conexion();
+
         public Login()
         {
             InitializeComponent();
@@ -19,10 +22,10 @@ namespace FrbaOfertas
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            if (passwordValida())
+            String codUsuario = textBox_usuario.Text;
+            String pass = textBox_password.Text;
+            if (passwordValida(codUsuario,pass) && usuarioDesbloqueado(codUsuario))
             {
-                this.textBox_usuario.Clear();
-                this.textBox_password.Clear();
                 this.Hide();
                 MenuForm menu = new MenuForm(this);
                 menu.Show();
@@ -30,10 +33,61 @@ namespace FrbaOfertas
 
         }
 
-        private bool passwordValida()
+
+        private bool passwordValida(String codUsuario, String pass)
         {
-            // TODO: Validar la password
-            return true;
+            if(existeUsuario(codUsuario))
+            {
+                DataSet dsUsuario = con.getUsuario(codUsuario, encriptarSHA256(pass));
+                if (dsUsuario.Tables[0].Rows.Count > 0)
+                {
+                    return true; 
+                }
+                else
+                {
+                    con.insertOrUpdateReintento(codUsuario);
+                    MessageBox.Show("Password Incorrecta");
+                    return false;
+                }
+            }else{
+                MessageBox.Show("Usuario no registrado");
+                return false;
+            }
+        }
+
+        private bool existeUsuario(String codUsuario){
+            DataSet dsUsuario = con.getUsuario(codUsuario);
+            return (dsUsuario.Tables[0].Rows.Count > 0);
+        }
+
+        private bool usuarioDesbloqueado(String codUsuario)
+        {
+            DataSet dsUsuarioBloqueado = con.getEstadoUsuario(codUsuario);
+            if (dsUsuarioBloqueado.Tables[0].Rows.Count > 0 && Equals(dsUsuarioBloqueado.Tables[0].Rows[0]["bloqueada"].ToString(),"S"))
+            {
+                MessageBox.Show("Usuario bloqueado, contactarse con el administrador");
+                return false;
+            }
+            else
+            {
+                con.reiniciarReintentos(codUsuario);
+                return true;
+            }
+        }
+
+        private string encriptarSHA256(string pass)
+        {
+            var byteMensaje = Encoding.ASCII.GetBytes(pass);
+            var sha = new SHA256Managed();
+            var shaConMensaje = sha.ComputeHash(byteMensaje);
+            System.Text.StringBuilder resultado = new StringBuilder();
+
+            foreach (byte b in shaConMensaje)
+            {
+                //escribirlo como hexa
+                resultado.Append(b.ToString("x2"));
+            }
+            return resultado.ToString();
         }
     }
 }

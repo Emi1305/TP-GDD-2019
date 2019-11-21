@@ -33,5 +33,24 @@ namespace FrbaOfertas
             this.Close();
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            AbmUsuario.AbmUsuarioMain pantallaUsuario = new AbmUsuario.AbmUsuarioMain();
+            pantallaUsuario.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            AbmRol.FormRol pantallaRol = new AbmRol.FormRol();
+            pantallaRol.Show();
+        }
     }
 }
