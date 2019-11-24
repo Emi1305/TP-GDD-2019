@@ -56,6 +56,12 @@
     <Compile Include="AbmProveedor\FormProveedor.Designer.cs">
       <DependentUpon>FormProveedor.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmRol\FormRolFuncionalidad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmRol\FormRolFuncionalidad.Designer.cs">
+      <DependentUpon>FormRolFuncionalidad.cs</DependentUpon>
+    </Compile>
     <Compile Include="AbmRol\FormRol.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +127,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AbmCliente\FormCliente.resx">
       <DependentUpon>FormCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmRol\FormRolFuncionalidad.resx">
+      <DependentUpon>FormRolFuncionalidad.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\FormRol.resx">
       <DependentUpon>FormRol.cs</DependentUpon>
