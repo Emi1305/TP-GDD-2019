@@ -11,7 +11,7 @@ cantidadReintentos int,
 PRIMARY KEY (codUsuario));
 
 CREATE TABLE Rol
-(codigo varchar(30),
+(codigo varchar(30) NOT NULL,
 descripcion varchar(50),
 PRIMARY KEY (codigo));
 

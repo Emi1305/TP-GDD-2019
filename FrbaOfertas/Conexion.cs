@@ -183,10 +183,179 @@ namespace FrbaOfertas
             }
             catch (Exception e)
             {
-                MessageBox.Show("Error ejecutando query getUsuario : " + e.ToString());
+                MessageBox.Show("Error ejecutando query getRolesUsuario : " + e.ToString());
             }
 
             return ds;
+        }
+
+        public DataTable getRolesFiltroExacto(String palabraFiltroExacto)
+        {
+            DataTable dataTable = new DataTable();
+            string q = "Select * from Rol where descripcion = '" + palabraFiltroExacto + "'";
+            try
+            {
+                Console.WriteLine(q);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(q, cn);
+                dataAdapter.Fill(dataTable);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error ejecutando query getRolesFiltroExacto : " + e.ToString());
+            }
+
+            return dataTable;
+        }
+
+        public DataTable getRolesFiltroLibre(String palabraFiltroLibre)
+        {
+            DataTable dataTable = new DataTable();
+            string q = "Select * from Rol where descripcion like '%" + palabraFiltroLibre + "%'";
+            try
+            {
+                Console.WriteLine(q);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(q, cn);
+                dataAdapter.Fill(dataTable);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error ejecutando query getRolesFiltroLibre : " + e.ToString());
+            }
+
+            return dataTable;
+        }
+
+        public DataTable getRolesFiltroMix(String palabraFiltroLibre, String palabraFiltroExacto)
+        {
+            DataTable dataTable = new DataTable();
+            string q = "Select * from Rol where descripcion like '%" + palabraFiltroLibre + "%' and descripcion = '" + palabraFiltroExacto + "'";
+            try
+            {
+                Console.WriteLine(q);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(q, cn);
+                dataAdapter.Fill(dataTable);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error ejecutando query getRolesFiltroMix : " + e.ToString());
+            }
+
+            return dataTable;
+        }
+
+        public bool agregarRol(String codRol, String descRol)
+        {
+            string q = "Insert into Rol(codigo,descripcion) values ('" + codRol + "','" +descRol+ "')";
+            try
+            {
+                Console.WriteLine(q);
+                cmd = new SqlCommand(q, cn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool deleteRol(String codRol)
+        {
+            string q = "Delete from Rol where codigo = '" + codRol + "'";
+            try
+            {
+                Console.WriteLine(q);
+                cmd = new SqlCommand(q, cn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool ActualizarRol(String codRol,String descRol){
+            string q = "Update Rol set descripcion = '" + descRol + "' where codigo = '" + codRol + "'";
+            try
+            {
+                Console.WriteLine(q);
+                cmd = new SqlCommand(q, cn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool deleteFuncionalidadRol(String codRol)
+        {
+            string q = "Delete from FuncionalidadRol where codRol = '" + codRol + "'";
+            try
+            {
+                Console.WriteLine(q);
+                cmd = new SqlCommand(q, cn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public DataTable getFuncionalidadesPorCodRol(String codRol)
+        {
+            DataTable dataTable = new DataTable();
+            string q = "Select f.codFuncionalidad, f.descFuncionalidad from FuncionalidadRol fr, Funcionalidad f where fr.codRol = '" + codRol + "' and fr.codFuncionalidad = f.codFuncionalidad";
+            try
+            {
+                Console.WriteLine(q);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(q, cn);
+                dataAdapter.Fill(dataTable);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error ejecutando query getFuncionalidadesPorCodRol : " + e.ToString());
+            }
+
+            return dataTable;
+        }
+
+        public DataSet getFuncionalidades()
+        {
+            DataSet ds = new DataSet();
+            string q = "Select * from Funcionalidad ";
+            try
+            {
+                Console.WriteLine(q);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(q, cn);
+                dataAdapter.Fill(ds);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error ejecutando query getFuncionalidades : " + e.ToString());
+            }
+
+            return ds;
+        }
+
+        public bool agregarFuncionalidadARol(String codFuncionalidad, String codRol)
+        {
+            string q = "Insert into FuncionalidadRol(codFuncionalidad,codRol) values ('" + codFuncionalidad + "','" + codRol + "')";
+            try
+            {
+                Console.WriteLine(q);
+                cmd = new SqlCommand(q, cn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
         }
 
         public void borrarUsuario(string codUsuario)
