@@ -80,11 +80,11 @@
     <Compile Include="AbmUsuario\AbmUsuarioMain.Designer.cs">
       <DependentUpon>AbmUsuarioMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmUsuario\UpdateUsuario.cs">
+    <Compile Include="AbmUsuario\AbmUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmUsuario\UpdateUsuario.Designer.cs">
-      <DependentUpon>UpdateUsuario.cs</DependentUpon>
+    <Compile Include="AbmUsuario\AbmUsuario.Designer.cs">
+      <DependentUpon>AbmUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="ComprarOferta\FormComprarOferta.cs">
       <SubType>Form</SubType>
@@ -146,8 +146,8 @@
     <EmbeddedResource Include="AbmUsuario\AbmUsuarioMain.resx">
       <DependentUpon>AbmUsuarioMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AbmUsuario\UpdateUsuario.resx">
-      <DependentUpon>UpdateUsuario.cs</DependentUpon>
+    <EmbeddedResource Include="AbmUsuario\AbmUsuario.resx">
+      <DependentUpon>AbmUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuForm.resx">
       <DependentUpon>MenuForm.cs</DependentUpon>

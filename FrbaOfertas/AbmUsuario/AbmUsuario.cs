@@ -11,11 +11,11 @@ using System.Security.Cryptography;
 
 namespace FrbaOfertas.AbmUsuario
 {
-    public partial class AbmUsuarioMain : Form
+    public partial class AbmUsuario : Form
     {
         Conexion con = new Conexion();
 
-        public AbmUsuarioMain()
+        public AbmUsuario()
         {
             InitializeComponent();
         }
@@ -79,7 +79,7 @@ namespace FrbaOfertas.AbmUsuario
         private void btnVolver_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Login menu = new Login();
+            MenuForm menu = new MenuForm();
             menu.Show();
         }
 

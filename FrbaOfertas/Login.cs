@@ -89,5 +89,12 @@ namespace FrbaOfertas
             }
             return resultado.ToString();
         }
+
+        private void linkRegistrarse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.Hide();
+            AbmUsuario.AbmUsuarioMain menu = new AbmUsuario.AbmUsuarioMain();
+            menu.Show();
+        }
     }
 }

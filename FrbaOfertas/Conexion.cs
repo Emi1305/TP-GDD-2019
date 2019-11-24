@@ -373,5 +373,23 @@ namespace FrbaOfertas
                 MessageBox.Show("Error ejecutando query insertUsuario : " + e.ToString());
             }
         }
+
+        public DataSet getRolesComunes()
+        {
+            DataSet ds = new DataSet();
+            string q = "Select * from Rol where codigo != 'ADM'";
+            try
+            {
+                Console.WriteLine(q);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(q, cn);
+                dataAdapter.Fill(ds);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error ejecutando query getRolesComunes : " + e.ToString());
+            }
+
+            return ds;
+        }
     }
 }

@@ -7,6 +7,7 @@ PRIMARY KEY (codUsuario));
 CREATE TABLE EstadoCuenta
 (codUsuario varchar(50),
 bloqueada char(1),
+baja char(1),
 cantidadReintentos int,
 PRIMARY KEY (codUsuario));
 
