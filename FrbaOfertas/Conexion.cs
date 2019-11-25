@@ -29,6 +29,24 @@ namespace FrbaOfertas
             }
         }
 
+        public DataTable getListaUsuarios()
+        {
+            DataTable dt = new DataTable();
+            string q = "select u.codUsuario, ec.bloqueada, ec.baja from Usuario u LEFT JOIN EstadoCuenta ec ON u.codUsuario = ec.codUsuario";
+            try
+            {
+                Console.WriteLine(q);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(q, cn);
+                dataAdapter.Fill(dt);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error ejecutando query getListaUsuarios : " + e.ToString());
+            }
+
+            return dt;
+        }
+
         public DataSet getUsuario(String codUsuario, String pass)
         {
             DataSet ds = new DataSet();
@@ -133,24 +151,6 @@ namespace FrbaOfertas
         public void insertRolUsuario(string codUsuario, string codRol)
         {
             string q = "Insert into UsuarioRol (codigoUsuario,codigoRol) values ('" + codUsuario + "','" + codRol + "')";
-        }
-
-        public DataTable getListUsuarios()
-        {
-            DataTable dataTable = new DataTable();
-            string q = "Select * from Usuario";
-            try
-            {
-                Console.WriteLine(q);
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(q, cn);
-                dataAdapter.Fill(dataTable);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Error ejecutando query getListUsuarios : " + e.ToString());
-            }
-
-            return dataTable;
         }
 
         public DataTable getRoles()
@@ -357,7 +357,41 @@ namespace FrbaOfertas
             }
             return true;
         }
+        public DataTable getUsuarioByFiltro(String textoExacto, String textoLibre, String estadoCuenta)
+        {
+            StringBuilder q = new StringBuilder("select u.codUsuario, ec.bloqueada, ec.baja from Usuario u LEFT JOIN EstadoCuenta ec ON u.codUsuario = ec.codUsuario where 1=1 ", 500);
+            if (!String.IsNullOrEmpty(textoExacto))
+            {
+                q.Append(" and u.codUsuario= '" + textoExacto + "' ");
+            }
+            if (!String.IsNullOrEmpty(textoLibre))
+            {
+                q.Append(" and u.codUsuario like '%" + textoLibre + "%' ");
+            }
+            if (String.Equals(estadoCuenta,"Baja"))
+            {
+                q.Append(" and ec.baja = 'S' ");
+            }
+            else if (String.Equals(estadoCuenta, "Bloqueada"))
+            {
+                q.Append(" and ec.bloqueada = 'S' ");
+            }
 
+            DataTable ds = new DataTable();
+            
+            try
+            {
+                Console.WriteLine(q.ToString());
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(q.ToString(), cn);
+                dataAdapter.Fill(ds);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error ejecutando query getUsuarioByFiltro : " + e.ToString());
+            }
+
+            return ds;
+        }
         public void borrarUsuario(string codUsuario)
         {
 
@@ -391,5 +425,6 @@ namespace FrbaOfertas
 
             return ds;
         }
+
     }
 }

@@ -22,6 +22,11 @@ namespace FrbaOfertas
             loginForm = f;
         }
 
+        public MenuForm()
+        {
+            InitializeComponent();
+        }
+
         private void MenuForm_Load(object sender, EventArgs e)
         {
             //this.mostrarMenusValidos();
@@ -42,7 +47,7 @@ namespace FrbaOfertas
         private void button9_Click(object sender, EventArgs e)
         {
             this.Hide();
-            AbmUsuario.AbmUsuarioMain pantallaUsuario = new AbmUsuario.AbmUsuarioMain();
+            AbmUsuario.AbmUsuario pantallaUsuario = new AbmUsuario.AbmUsuario();
             pantallaUsuario.Show();
         }
 
