@@ -93,7 +93,7 @@ namespace FrbaOfertas
         private void linkRegistrarse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.Hide();
-            AbmUsuario.AbmUsuarioMain menu = new AbmUsuario.AbmUsuarioMain();
+            AbmUsuario.AbmUsuarioMain menu = new AbmUsuario.AbmUsuarioMain(this);
             menu.Show();
         }
     }

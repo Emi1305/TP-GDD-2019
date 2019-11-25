@@ -31,6 +31,22 @@ CREATE TABLE FuncionalidadRol
 codRol varchar(30),
 PRIMARY KEY (codFuncionalidad, codRol));
 
+CREATE TABLE Factura
+(numero [numeric](18, 0) not null,
+fecha datetime,
+cliente [numeric](7, 0),
+proveedor [numeric](3, 0),
+PRIMARY KEY (numero));
+
+CREATE TABLE Proveedor
+(idProveedor [numeric](3, 0) not null IDENTITY(1,1),
+razonSocial varchar(100),
+domicilio varchar(100),
+telefono [numeric](18, 0),
+cuit varchar(20),
+rubro varchar(10),
+PRIMARY KEY (idProveedor));
+
 ALTER TABLE EstadoCuenta
 ADD FOREIGN KEY (codUsuario) REFERENCES Usuario(codUsuario); 
 
@@ -45,6 +61,9 @@ ADD FOREIGN KEY (codFuncionalidad) REFERENCES Funcionalidad(codFuncionalidad);
 
 ALTER TABLE FuncionalidadRol
 ADD FOREIGN KEY (codRol) REFERENCES Rol(codigo); 
+
+ALTER TABLE Factura
+ADD FOREIGN KEY (proveedor) REFERENCES Proveedor(idProveedor); 
 
 Insert into Usuario values ('admin','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
 

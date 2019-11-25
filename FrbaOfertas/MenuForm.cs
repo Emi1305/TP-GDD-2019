@@ -34,8 +34,9 @@ namespace FrbaOfertas
 
         private void buttonSalir_Click(object sender, EventArgs e)
         {
-            loginForm.Show();
-            this.Close();
+            this.Hide();
+            Login login = new Login();
+            login.Show();
 
         }
 
@@ -56,6 +57,13 @@ namespace FrbaOfertas
             this.Hide();
             AbmRol.FormRol pantallaRol = new AbmRol.FormRol();
             pantallaRol.Show();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            ListadoEstadistico.FormListadoEstadistico formularioEstadistico = new ListadoEstadistico.FormListadoEstadistico();
+            formularioEstadistico.Show();
         }
     }
 }

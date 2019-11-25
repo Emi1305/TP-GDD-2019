@@ -132,10 +132,10 @@ namespace FrbaOfertas
 
         }
 
-        public void insertUsuario(string codUsuario, string pass)
+        public bool insertUsuario(string codUsuario, string pass)
         {
 
-            string q = "Insert into Usuario (nombre,password) values ('" + codUsuario + "','" + pass + "')";
+            string q = "Insert into Usuario (codUsuario,password) values ('" + codUsuario + "','" + pass + "')";
             try
             {
                 Console.WriteLine(q);
@@ -144,8 +144,9 @@ namespace FrbaOfertas
             }
             catch (Exception e)
             {
-                MessageBox.Show("Error ejecutando query insertUsuario : " + e.ToString());
+                return false;
             }
+            return true;
         }
 
         public void insertRolUsuario(string codUsuario, string codRol)
@@ -395,7 +396,7 @@ namespace FrbaOfertas
         public void borrarUsuario(string codUsuario)
         {
 
-            string q = "Delete Usuario where nombre = '" + codUsuario + "'";
+            string q = "Delete Usuario where codUsuario = '" + codUsuario + "'";
             try
             {
                 Console.WriteLine(q);
@@ -404,7 +405,23 @@ namespace FrbaOfertas
             }
             catch (Exception e)
             {
-                MessageBox.Show("Error ejecutando query insertUsuario : " + e.ToString());
+                MessageBox.Show("Error ejecutando query borrarUsuario : " + e.ToString());
+            }
+        }
+
+        public void deleteEstadoUsuario(string codUsuario)
+        {
+
+            string q = "Delete EstadoCuenta where codUsuario = '" + codUsuario + "'";
+            try
+            {
+                Console.WriteLine(q);
+                cmd = new SqlCommand(q, cn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error ejecutando query deleteEstadoUsuario : " + e.ToString());
             }
         }
 

@@ -22,14 +22,19 @@ namespace FrbaOfertas.AbmUsuario
 
         private void FormRol_Load(object sender, EventArgs e)
         {
-            DataTable listaUsuarios = con.getListaUsuarios();
-            gridUsuario.DataSource = listaUsuarios;
+            refreshlistaUsuarios();
             gridUsuario.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
             cmbEstadoCuenta.Visible = false;
         }
 
         private void addItemToCmb(String text, String value)
         {
+        }
+
+        private void refreshlistaUsuarios()
+        {
+            DataTable listaUsuarios = con.getListaUsuarios();
+            gridUsuario.DataSource = listaUsuarios;
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -99,6 +104,27 @@ namespace FrbaOfertas.AbmUsuario
         private void cmbEstadoCuenta_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnBorrar_Click(object sender, EventArgs e)
+        {
+            String codUsuario = this.gridUsuario.CurrentRow.Cells[0].Value.ToString();
+            DialogResult dialogResult = MessageBox.Show("Esta seguro que quiere eliminar el Usuario : " + codUsuario, "Borrar Usuario", MessageBoxButtons.YesNo);
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                con.deleteEstadoUsuario(codUsuario);
+                con.borrarUsuario(codUsuario);
+            }
+
+            refreshlistaUsuarios();
+        }
+
+        private void btnAgregar_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+            AbmUsuarioMain menu = new AbmUsuarioMain(this);
+            menu.Show();
         }
 
     }

@@ -14,9 +14,11 @@ namespace FrbaOfertas.AbmUsuario
     public partial class AbmUsuarioMain : Form
     {
         Conexion con = new Conexion();
+        Form anterior;
 
-        public AbmUsuarioMain()
+        public AbmUsuarioMain(Form f)
         {
+            anterior = f; 
             InitializeComponent();
         }
 
@@ -46,6 +48,7 @@ namespace FrbaOfertas.AbmUsuario
                 DataSet listaUsuario = con.getUsuario(user);
                 if (listaUsuario.Tables[0].Rows.Count == 0)
                 {
+                    con.insertUsuario(user, passEncriptada);
                     this.Hide();
                     Login menu = new Login();
                     menu.Show();
@@ -56,9 +59,7 @@ namespace FrbaOfertas.AbmUsuario
                     txtUser.Text = "";
                     txtPass.Text = "";
                 }
-            }
-            con.insertUsuario(user, passEncriptada);
-            
+            }           
         }
 
         public string encriptarSHA256(string mensaje)
@@ -79,8 +80,7 @@ namespace FrbaOfertas.AbmUsuario
         private void btnVolver_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Login menu = new Login();
-            menu.Show();
+            anterior.Show();
         }
 
         private void cmbRoles_SelectedIndexChanged(object sender, EventArgs e)
