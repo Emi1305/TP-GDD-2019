@@ -1,4 +1,4 @@
-
+--Creacion de estructuras
 CREATE TABLE Usuario
 (codUsuario varchar(50),
 password varchar(max),
@@ -47,6 +47,42 @@ cuit varchar(20),
 rubro varchar(10),
 PRIMARY KEY (idProveedor));
 
+CREATE TABLE Rubro
+(id [numeric](3, 0) not null IDENTITY(1,1),
+nombre nvarchar(100),
+PRIMARY KEY (id));
+
+declare @rubroNombre nvarchar(100)
+declare CUR cursor for 
+		SELECT distinct(provee_rubro)
+		from gd_esquema.Maestra
+		where provee_rubro is not null;
+
+OPEN CUR
+	fetch CUR into @rubroNombre
+	while @@FETCH_STATUS = 0
+	BEGIN
+	insert into rubro(nombre) values (@rubroNombre)
+	fetch CUR into @rubroNombre
+	end	
+	CLOSE CUR
+	DEALLOCATE CUR
+	
+--Data de la app
+
+Insert into Usuario values ('admin','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
+
+Insert into Rol values ('PV','Proveedor');
+Insert into Rol values ('ADM','Administrativo');
+Insert into Rol values ('CL','Cliente');
+
+Insert into Funcionalidad values ('PP','Pago a Proveedores');
+Insert into Funcionalidad values ('CC','Carga Credito');
+Insert into Funcionalidad values ('OF','Ofertas');
+Insert into Funcionalidad values ('ES','Estadisticas');
+
+--creacion de FK
+
 ALTER TABLE EstadoCuenta
 ADD FOREIGN KEY (codUsuario) REFERENCES Usuario(codUsuario); 
 
@@ -63,16 +99,4 @@ ALTER TABLE FuncionalidadRol
 ADD FOREIGN KEY (codRol) REFERENCES Rol(codigo); 
 
 ALTER TABLE Factura
-ADD FOREIGN KEY (proveedor) REFERENCES Proveedor(idProveedor); 
-
-Insert into Usuario values ('admin','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
-
-Insert into Rol values ('PV','Proveedor');
-Insert into Rol values ('ADM','Administrativo');
-Insert into Rol values ('CL','Cliente');
-
-Insert into Funcionalidad values ('PP','Pago a Proveedores');
-Insert into Funcionalidad values ('CC','Carga Credito');
-Insert into Funcionalidad values ('OF','Ofertas');
-Insert into Funcionalidad values ('ES','Estadisticas');
-
+ADD FOREIGN KEY (proveedor) REFERENCES Proveedor(idProveedor);
