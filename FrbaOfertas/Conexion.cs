@@ -545,5 +545,39 @@ namespace FrbaOfertas
             }
         }
 
+        public DataSet getTipoPago()
+        {
+            DataSet ds = new DataSet();
+            string q = "Select * from TipoPago";
+            try
+            {
+                Console.WriteLine(q);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(q, cn);
+                dataAdapter.Fill(ds);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error ejecutando query getTipoPago : " + e.ToString());
+            }
+
+            return ds;
+        }
+
+        public void insertCarga(long monto, String fecha, int tipoPago, int idCliente, long numeroTarjeta)
+        {
+            string q = "Insert into FuncionalidadRol(codFuncionalidad,codRol) values ('" + codFuncionalidad + "','" + codRol + "')";
+            try
+            {
+                Console.WriteLine(q);
+                cmd = new SqlCommand(q, cn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
     }
 }

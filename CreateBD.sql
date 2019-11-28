@@ -101,6 +101,31 @@ OPEN CUR
 	CLOSE CUR
 	DEALLOCATE CUR
 	
+	
+	
+CREATE TABLE TipoPago
+(codigo [numeric](3, 0) not null IDENTITY(1,1),
+descripcion nvarchar(100),
+PRIMARY KEY (codigo));
+
+--Cursores
+
+declare @tipoPago nvarchar(100)
+declare CUR cursor for 
+		SELECT distinct(Tipo_Pago_Desc)
+		from gd_esquema.Maestra
+		where tipo_pago_desc is not null;
+
+OPEN CUR
+	fetch CUR into @tipoPago
+	while @@FETCH_STATUS = 0
+	BEGIN
+	insert into TipoPago(descripcion) values (@tipoPago)
+	fetch CUR into @tipoPago
+	end	
+	CLOSE CUR
+	DEALLOCATE CUR
+	
 --Data de la app
 
 Insert into Usuario values ('admin','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');

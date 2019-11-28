@@ -72,5 +72,13 @@ namespace FrbaOfertas
             AbmProveedor.FormProveedor formProveedor = new AbmProveedor.FormProveedor();
             formProveedor.Show();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            CragaCredito.FormCargaCredito form = new CragaCredito.FormCargaCredito();
+            form.Show();
+            
+        }
     }
 }

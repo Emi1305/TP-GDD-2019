@@ -33,6 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -160,6 +161,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmUsuario\AbmUsuario.resx">
       <DependentUpon>AbmUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CragaCredito\FormCargaCredito.resx">
+      <DependentUpon>FormCargaCredito.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ListadoEstadistico\FormListadoEstadistico.resx">
       <DependentUpon>FormListadoEstadistico.cs</DependentUpon>
