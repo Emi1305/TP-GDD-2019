@@ -40,17 +40,24 @@ PRIMARY KEY (numero));
 
 CREATE TABLE Proveedor
 (idProveedor [numeric](3, 0) not null IDENTITY(1,1),
-razonSocial varchar(100),
-domicilio varchar(100),
+razonSocial nvarchar(100) UNIQUE,
+domicilio nvarchar(100),
+ciudad nvarchar(255),
 telefono [numeric](18, 0),
-cuit varchar(20),
-rubro varchar(10),
+mail nvarchar(100),
+codigoPostal [numeric](4, 0),
+contacto nvarchar(150),
+cuit nvarchar(20) UNIQUE,
+baja nvarchar(1)DEFAULT 'N',
+rubro [numeric](3, 0),
 PRIMARY KEY (idProveedor));
 
 CREATE TABLE Rubro
 (id [numeric](3, 0) not null IDENTITY(1,1),
 nombre nvarchar(100),
 PRIMARY KEY (id));
+
+--Cursores
 
 declare @rubroNombre nvarchar(100)
 declare CUR cursor for 
@@ -64,6 +71,32 @@ OPEN CUR
 	BEGIN
 	insert into rubro(nombre) values (@rubroNombre)
 	fetch CUR into @rubroNombre
+	end	
+	CLOSE CUR
+	DEALLOCATE CUR
+	
+	
+declare @proveeRazonSocial nvarchar(100),
+		@proveeDomicilio nvarchar(100),
+		@proveeCiudad nvarchar(255),
+		@proveeTelefono numeric(18,0),
+		@proveeCuit nvarchar(20),
+		@proveeRubro nvarchar(100),
+		@proveeCodRubro [numeric](3, 0)
+
+declare CUR cursor for 
+		SELECT distinct Provee_RS, Provee_Dom, Provee_ciudad, Provee_telefono, provee_cuit, provee_rubro 
+		from gd_esquema.Maestra
+		where provee_rubro is not null;
+
+OPEN CUR
+	fetch CUR into @proveeRazonSocial,@proveeDomicilio,@proveeCiudad,@proveeTelefono,@proveeCuit,@proveeRubro
+	while @@FETCH_STATUS = 0
+	BEGIN
+	select @proveeCodRubro = id from rubro where nombre = @proveeRubro
+	insert into Proveedor(razonSocial,domicilio,ciudad,telefono,cuit,rubro) 
+	values (@proveeRazonSocial,@proveeDomicilio,@proveeCiudad,@proveeTelefono,@proveeCuit,@proveeCodRubro)
+	fetch CUR into @proveeRazonSocial,@proveeDomicilio,@proveeCiudad,@proveeTelefono,@proveeCuit,@proveeRubro
 	end	
 	CLOSE CUR
 	DEALLOCATE CUR
@@ -100,3 +133,6 @@ ADD FOREIGN KEY (codRol) REFERENCES Rol(codigo);
 
 ALTER TABLE Factura
 ADD FOREIGN KEY (proveedor) REFERENCES Proveedor(idProveedor);
+
+ALTER TABLE Proveedor
+ADD FOREIGN KEY (rubro) REFERENCES Rubro(id);

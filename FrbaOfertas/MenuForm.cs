@@ -10,19 +10,19 @@ using System.Windows.Forms;
 
 namespace FrbaOfertas
 {
-    public partial class MenuForm : Form
+    public partial class Menu : Form
     {
         private delegate void MostrarMenus();
         private MostrarMenus mostrarMenusValidos;
         private Form loginForm;
 
-        public MenuForm(Form f )
+        public Menu(Form f )
         {
             InitializeComponent();
             loginForm = f;
         }
 
-        public MenuForm()
+        public Menu()
         {
             InitializeComponent();
         }
@@ -64,6 +64,13 @@ namespace FrbaOfertas
             this.Hide();
             ListadoEstadistico.FormListadoEstadistico formularioEstadistico = new ListadoEstadistico.FormListadoEstadistico();
             formularioEstadistico.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            AbmProveedor.FormProveedor formProveedor = new AbmProveedor.FormProveedor();
+            formProveedor.Show();
         }
     }
 }

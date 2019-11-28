@@ -443,5 +443,107 @@ namespace FrbaOfertas
             return ds;
         }
 
+        public DataSet getRubros()
+        {
+            DataSet ds = new DataSet();
+            string q = "Select * from Rubro";
+            try
+            {
+                Console.WriteLine(q);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(q, cn);
+                dataAdapter.Fill(ds);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error ejecutando query getRubros : " + e.ToString());
+            }
+
+            return ds;
+        }
+
+        public DataTable getListaProveedores()
+        {
+            DataTable dt = new DataTable();
+            string q = "select p.razonSocial, p.domicilio, p.ciudad, p.telefono, p.cuit, r.nombre  as rubro ,p.baja as EstadoProveedor,p.mail,p.codigoPostal,p.contacto ,p.idProveedor from Proveedor p , Rubro r";
+            try
+            {
+                Console.WriteLine(q);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(q, cn);
+                dataAdapter.Fill(dt);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error ejecutando query getListaProveedores : " + e.ToString());
+            }
+
+            return dt;
+        }
+
+        public DataTable getProveedoresByFiltro(String textoExacto, String textoLibre, String rubro)
+        {
+            StringBuilder q = new StringBuilder("select p.razonSocial, p.domicilio, p.ciudad, p.telefono, p.cuit, r.nombre as rubro ,p.baja as EstadoProveedor,p.mail,p.codigoPostal,p.contacto ,p.idProveedor from Proveedor p , Rubro r where p.rubro = r.id", 800);
+            if (!String.IsNullOrEmpty(textoExacto))
+            {
+                q.Append(" and (p.razonSocial= '" + textoExacto + "' or p.mail = '" + textoExacto + "' or p.cuit = '" + textoExacto + "') ");
+            }
+            if (!String.IsNullOrEmpty(textoLibre))
+            {
+                q.Append(" and (p.razonSocial like '%" + textoLibre + "%' or p.mail like  '%" + textoLibre + "%' or p.cuit like '%" + textoLibre + "%') ");
+            }
+            if (!String.IsNullOrEmpty(rubro))
+            {
+                q.Append(" and (r.nombre = '"+rubro+  "')");
+            }
+
+            DataTable dt = new DataTable();
+
+            try
+            {
+                Console.WriteLine(q.ToString());
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(q.ToString(), cn);
+                dataAdapter.Fill(dt);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error ejecutando query getProveedoresByFiltro : " + e.ToString());
+            }
+
+            return dt;
+        }
+
+        public void insertProveedor(String razonSocial, String domicilio, String ciudad, String telefono, String cuit, int rubro, String estadoBaja, String mail, String codigoPostal, String contacto)
+        {
+            long longCodigoPostal = !String.IsNullOrEmpty(codigoPostal) ? Convert.ToInt64(codigoPostal) : 0L;
+            int intTelefono = !String.IsNullOrEmpty(telefono) ? Convert.ToInt32(telefono) : 0;
+            string q = "Insert into Proveedor(razonSocial,domicilio,ciudad,telefono,mail,codigoPostal,contacto,cuit,baja,rubro) values ('" + razonSocial + "','" + domicilio + "','" + ciudad + "'," + intTelefono + ",'" + mail + "', " + longCodigoPostal + ", '" + contacto + "','" + cuit + "','" + estadoBaja + "'," + rubro + ")";
+            try
+            {
+                Console.WriteLine(q);
+                cmd = new SqlCommand(q, cn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error ejecutando query insertProveedor : " + e.ToString());
+            }
+        }
+
+        public void updateProveedor(String razonSocial, String domicilio, String ciudad, String telefono, String cuit, int rubro, String estadoBaja, String mail, String codigoPostal, String contacto, int idProveedor)
+        {
+            long longCodigoPostal = !String.IsNullOrEmpty(codigoPostal) ? Convert.ToInt64(codigoPostal) : 0L;
+            int intTelefono = !String.IsNullOrEmpty(telefono) ? Convert.ToInt32(telefono) : 0;
+            string q = "Update Proveedor set razonSocial = '" + razonSocial + "' , domicilio = '" + domicilio + "' , ciudad = '" + ciudad + "', telefono =  " + intTelefono + ", mail = '" + mail + "', codigoPostal = " + longCodigoPostal + ",contacto = '" + contacto + "',cuit='" + cuit + "',baja = '" + estadoBaja + "',rubro = " + rubro + " where idProveedor = " + idProveedor + "";
+            try
+            {
+                Console.WriteLine(q);
+                cmd = new SqlCommand(q, cn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error ejecutando query updateProveedor : " + e.ToString());
+            }
+        }
+
     }
 }

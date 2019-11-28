@@ -1,6 +1,6 @@
 ﻿namespace FrbaOfertas
 {
-    partial class MenuForm
+    partial class Menu
     {
         /// <summary>
         /// Variable del diseñador requerida.
@@ -52,12 +52,13 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(47, 279);
+            this.button2.Location = new System.Drawing.Point(47, 86);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(175, 23);
             this.button2.TabIndex = 1;
             this.button2.Text = "Proveedores";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -71,7 +72,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(47, 98);
+            this.button4.Location = new System.Drawing.Point(47, 337);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(175, 23);
             this.button4.TabIndex = 3;
@@ -80,7 +81,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(47, 137);
+            this.button5.Location = new System.Drawing.Point(47, 192);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(175, 23);
             this.button5.TabIndex = 4;
@@ -89,7 +90,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(47, 175);
+            this.button6.Location = new System.Drawing.Point(47, 279);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(175, 23);
             this.button6.TabIndex = 5;
@@ -98,7 +99,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(47, 204);
+            this.button7.Location = new System.Drawing.Point(47, 221);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(175, 23);
             this.button7.TabIndex = 6;
@@ -107,7 +108,7 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(47, 233);
+            this.button8.Location = new System.Drawing.Point(47, 250);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(175, 23);
             this.button8.TabIndex = 7;
@@ -127,15 +128,15 @@
             // 
             // buttonSalir
             // 
-            this.buttonSalir.Location = new System.Drawing.Point(47, 359);
+            this.buttonSalir.Location = new System.Drawing.Point(99, 432);
             this.buttonSalir.Name = "buttonSalir";
-            this.buttonSalir.Size = new System.Drawing.Size(175, 23);
+            this.buttonSalir.Size = new System.Drawing.Size(77, 23);
             this.buttonSalir.TabIndex = 9;
             this.buttonSalir.Text = "Salir";
             this.buttonSalir.UseVisualStyleBackColor = true;
             this.buttonSalir.Click += new System.EventHandler(this.buttonSalir_Click);
             // 
-            // MenuForm
+            // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -150,8 +151,8 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Name = "MenuForm";
-            this.Text = "MenuForm";
+            this.Name = "Menu";
+            this.Text = "Menu";
             this.Load += new System.EventHandler(this.MenuForm_Load);
             this.ResumeLayout(false);
 

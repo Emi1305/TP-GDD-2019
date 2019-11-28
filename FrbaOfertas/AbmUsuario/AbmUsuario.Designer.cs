@@ -65,6 +65,7 @@
             this.gridUsuario.ReadOnly = true;
             this.gridUsuario.Size = new System.Drawing.Size(251, 348);
             this.gridUsuario.TabIndex = 8;
+            this.gridUsuario.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridUsuario_CellContentClick);
             // 
             // btnAgregar
             // 

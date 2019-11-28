@@ -38,7 +38,7 @@ namespace FrbaOfertas.AbmRol
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            MenuForm menu = new MenuForm(this);
+            Menu menu = new Menu(this);
             menu.Show();
         }
 

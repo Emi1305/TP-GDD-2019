@@ -27,7 +27,7 @@ namespace FrbaOfertas
             if (passwordValida(codUsuario,pass) && usuarioDesbloqueado(codUsuario))
             {
                 this.Hide();
-                MenuForm menu = new MenuForm(this);
+                Menu menu = new Menu(this);
                 menu.Show();
             }
 

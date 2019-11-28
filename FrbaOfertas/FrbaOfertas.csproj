@@ -50,6 +50,12 @@
     <Compile Include="AbmCliente\FormCliente.Designer.cs">
       <DependentUpon>FormCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmProveedor\FormProveedorNuevo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmProveedor\FormProveedorNuevo.Designer.cs">
+      <DependentUpon>FormProveedorNuevo.cs</DependentUpon>
+    </Compile>
     <Compile Include="AbmProveedor\FormProveedor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,6 +140,12 @@
     <EmbeddedResource Include="AbmCliente\FormCliente.resx">
       <DependentUpon>FormCliente.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AbmProveedor\FormProveedorNuevo.resx">
+      <DependentUpon>FormProveedorNuevo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmProveedor\FormProveedor.resx">
+      <DependentUpon>FormProveedor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\FormRolNuevo.resx">
       <DependentUpon>FormRolNuevo.cs</DependentUpon>
     </EmbeddedResource>
@@ -148,6 +160,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmUsuario\AbmUsuario.resx">
       <DependentUpon>AbmUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListadoEstadistico\FormListadoEstadistico.resx">
+      <DependentUpon>FormListadoEstadistico.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuForm.resx">
       <DependentUpon>MenuForm.cs</DependentUpon>

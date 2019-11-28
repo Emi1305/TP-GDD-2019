@@ -59,7 +59,7 @@ namespace FrbaOfertas.AbmUsuario
         private void btnVolver_Click(object sender, EventArgs e)
         {
             this.Hide();
-            MenuForm menu = new MenuForm();
+            Menu menu = new Menu();
             menu.Show();
         }
 
@@ -73,6 +73,7 @@ namespace FrbaOfertas.AbmUsuario
             txtTextoExacto.Text = "";
             txtTextoLibre.Text = "";
             cmbEstadoCuenta.SelectedValue = "";
+            checkBuscarEstado.Checked = false;
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -125,6 +126,11 @@ namespace FrbaOfertas.AbmUsuario
             this.Hide();
             AbmUsuarioMain menu = new AbmUsuarioMain(this);
             menu.Show();
+        }
+
+        private void gridUsuario_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
 
     }
