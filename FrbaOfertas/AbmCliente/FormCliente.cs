@@ -57,7 +57,7 @@ namespace FrbaOfertas.AbmCliente
         {
             textBox_dni.Text = "";
             DataTable ds = con.getClientesByFiltro("", "", 0, "");
-            gridClientes.DataSource = ds;
+            ds.Columns.IndexOf("nombre");
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -82,28 +82,15 @@ namespace FrbaOfertas.AbmCliente
             String direccion = this.gridClientes.CurrentRow.Cells[5].Value.ToString();
             String ciudad = this.gridClientes.CurrentRow.Cells[6].Value.ToString();
             DateTime fecNacimiento = DateTime.Parse(this.gridClientes.CurrentRow.Cells[7].Value.ToString());
-          //  int idProveedor = Convert.ToInt32(this.gridProveedores.CurrentRow.Cells[10].Value.ToString());
+            int idCliente = Convert.ToInt32(this.gridClientes.CurrentRow.Cells[8].Value.ToString());
 
-            FormClienteNuevo form = new FormClienteNuevo(nombre, apellido, dni, telefono, mail, direccion, ciudad, fecNacimiento);
+            FormClienteNuevo form = new FormClienteNuevo(idCliente, nombre, apellido, dni, telefono, mail, direccion, ciudad, fecNacimiento);
             form.Show();
         }
 
         private void gridClientes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            this.Hide();
-            String nombre = this.gridClientes.CurrentRow.Cells[0].Value.ToString();
-            String apellido = this.gridClientes.CurrentRow.Cells[1].Value.ToString();
-            String strDNI = this.gridClientes.CurrentRow.Cells[2].Value.ToString();
-            int dni = Convert.ToInt32(strDNI!="" ? strDNI : "0");
-            String strTelefono = this.gridClientes.CurrentRow.Cells[3].Value.ToString();
-            int telefono = Convert.ToInt32(strTelefono!="" ? strTelefono : "0");
-            String mail = this.gridClientes.CurrentRow.Cells[4].Value.ToString();
-            String direccion = this.gridClientes.CurrentRow.Cells[5].Value.ToString();
-            String ciudad = this.gridClientes.CurrentRow.Cells[6].Value.ToString();
-            DateTime fecNacimiento = DateTime.Parse(this.gridClientes.CurrentRow.Cells[7].Value.ToString());
-
-            FormClienteNuevo form = new FormClienteNuevo(nombre, apellido, dni, telefono, mail, direccion, ciudad, fecNacimiento);
-            form.Show();
+            
         }
     }
 }

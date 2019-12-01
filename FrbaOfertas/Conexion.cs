@@ -461,6 +461,24 @@ namespace FrbaOfertas
             return ds;
         }
 
+        public DataSet getProveedores()
+        {
+            DataSet ds = new DataSet();
+            string q = "select idProveedor, razonSocial from Proveedores";
+            try
+            {
+                Console.WriteLine(q);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(q, cn);
+                dataAdapter.Fill(ds);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error ejecutando query getProveedores : " + e.ToString());
+            }
+
+            return ds;
+        }
+
         public DataTable getListaProveedores()
         {
             DataTable dt = new DataTable();
@@ -513,7 +531,7 @@ namespace FrbaOfertas
 
         public DataTable getClientesByFiltro(String nombre, String apellido, int dni, String mail)
         {
-            StringBuilder q = new StringBuilder("select nombre, apellido, dni, telefono, mail, direccion, ciudad, fecha_nacimiento " + 
+            StringBuilder q = new StringBuilder("select nombre, apellido, dni, telefono, mail, direccion, ciudad, fecha_nacimiento, idCliente " + 
                 " FROM Cliente WHERE 1=1 ", 800);
             if (!String.IsNullOrEmpty(nombre))
             {
@@ -633,12 +651,12 @@ namespace FrbaOfertas
             }
         }
 
-        public void updateCliente(int dniID, String nombre, String apellido, int dni, String telefono, String mail, String direccion, String ciudad, DateTime fechaNacimiento)
+        public void updateCliente(int clienteID, String nombre, String apellido, int dni, String telefono, String mail, String direccion, String ciudad, DateTime fechaNacimiento)
         {
             int intTelefono = !String.IsNullOrEmpty(telefono) ? Convert.ToInt32(telefono) : 0;
             string q = "update Cliente set nombre = '" + nombre + "', apellido = '" + apellido + "', dni = " + dni + 
                 ", telefono =" + intTelefono + ", mail = '" + mail + "', direccion = '" + direccion + "', ciudad = '" + ciudad + 
-                "', fecha_nacimiento = '" + fechaNacimiento + "' WHERE dni = " + dniID;
+                "', fecha_nacimiento = '" + fechaNacimiento + "' WHERE idCliente = " + clienteID;
             try
             {
                 Console.WriteLine(q);
@@ -649,6 +667,25 @@ namespace FrbaOfertas
             {
                 MessageBox.Show("Error ejecutando query insertCliente : " + e.ToString());
             }
+        }
+
+        public void insertOferta(int idProveedor, String descripcion, DateTime fecPublicacion, DateTime fecVencimiento, double precioLista, double precioOferta, int cantidad) 
+        {
+            string q = "INSERT INTO OFERTA (DESCRIPCION, PRECIO_OFERTA, PRECIO_LISTA," + 
+                            "CANTIDAD,FECHA_PUBLICACION,FECHA_VENCIMIENTO, ID_PROVEEDOR)" +
+                        "VALUES ('"+ descripcion +"',"+ precioOferta +","+ (precioLista>0?precioLista.ToString():"")+","+ 
+                        (cantidad>0?cantidad.ToString():"") +",'"+ fecPublicacion +"','"+ fecVencimiento +"',"+ idProveedor +")";
+            try
+            {
+                Console.WriteLine(q);
+                cmd = new SqlCommand(q, cn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error ejecutando query insertOferta : " + e.ToString());
+            }
+
         }
 
     }

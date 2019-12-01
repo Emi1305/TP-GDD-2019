@@ -151,5 +151,15 @@ namespace FrbaOfertas.AbmProveedor
         {
 
         }
+
+        private void txtCuit_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbRubro_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

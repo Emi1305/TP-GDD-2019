@@ -13,6 +13,7 @@ namespace FrbaOfertas.AbmCliente
     public partial class FormClienteNuevo : Form
     {
         Conexion con = new Conexion();
+        private int idCliente;
         private String nombre;
         private String apellido;
         private String mail;
@@ -28,8 +29,9 @@ namespace FrbaOfertas.AbmCliente
             InitializeComponent();
         }
 
-        public FormClienteNuevo(String nombre, String apellido, int dni, int telefono, String mail, String direccion, String ciudad, DateTime fechaNacimiento)
+        public FormClienteNuevo(int idCliente, String nombre, String apellido, int dni, int telefono, String mail, String direccion, String ciudad, DateTime fechaNacimiento)
         {
+            this.idCliente = idCliente;
             this.nombre = nombre;
             this.apellido = apellido;
             this.dni = dni;
@@ -110,7 +112,6 @@ namespace FrbaOfertas.AbmCliente
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            int dniID = this.dni;
             int dni = Convert.ToInt32(textBox_dni.Text!="" ? textBox_dni.Text : "0");
             DateTime fechaNacimiento = dtp_fecNacimiento.Value;
             String nombre = textBox_nombre.Text;
@@ -125,7 +126,7 @@ namespace FrbaOfertas.AbmCliente
             {
                 if (update)
                 {
-                    con.updateCliente(dniID, nombre, apellido, dni, telefono, mail, direccion, ciudad, fechaNacimiento);
+                    con.updateCliente(idCliente, nombre, apellido, dni, telefono, mail, direccion, ciudad, fechaNacimiento);
                 }
                 else
                 {

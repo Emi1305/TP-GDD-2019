@@ -176,6 +176,9 @@
     <EmbeddedResource Include="CragaCredito\FormCargaCredito.resx">
       <DependentUpon>FormCargaCredito.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CrearOferta\FormOferta.resx">
+      <DependentUpon>FormOferta.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ListadoEstadistico\FormListadoEstadistico.resx">
       <DependentUpon>FormListadoEstadistico.cs</DependentUpon>
     </EmbeddedResource>

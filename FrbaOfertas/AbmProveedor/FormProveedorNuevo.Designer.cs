@@ -225,6 +225,7 @@
             this.txtCuit.Name = "txtCuit";
             this.txtCuit.Size = new System.Drawing.Size(213, 20);
             this.txtCuit.TabIndex = 19;
+            this.txtCuit.TextChanged += new System.EventHandler(this.txtCuit_TextChanged);
             // 
             // cmbRubro
             // 
@@ -233,6 +234,7 @@
             this.cmbRubro.Name = "cmbRubro";
             this.cmbRubro.Size = new System.Drawing.Size(213, 21);
             this.cmbRubro.TabIndex = 21;
+            this.cmbRubro.SelectedIndexChanged += new System.EventHandler(this.cmbRubro_SelectedIndexChanged);
             // 
             // cmbEstadoBaja
             // 
