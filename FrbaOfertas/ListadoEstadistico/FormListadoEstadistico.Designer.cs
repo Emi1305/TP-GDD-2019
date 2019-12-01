@@ -37,6 +37,7 @@
             this.ClientSize = new System.Drawing.Size(492, 478);
             this.Name = "FormListadoEstadistico";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.FormListadoEstadistico_Load);
             this.ResumeLayout(false);
 
         }

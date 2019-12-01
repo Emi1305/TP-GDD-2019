@@ -20,7 +20,7 @@ namespace FrbaOfertas
         {
             try
             {
-                cn = new SqlConnection(@"Data Source=DESKTOP-BSCUONA\SQLEXPRESS;Initial Catalog=GD2C2019;Integrated Security=True");
+                cn = new SqlConnection(@"Data Source=localhost\SQLSERVER2012;Initial Catalog=GD2C2019;Integrated Security=True");
                 cn.Open();
             }
             catch(Exception e)
@@ -511,6 +511,43 @@ namespace FrbaOfertas
             return dt;
         }
 
+        public DataTable getClientesByFiltro(String nombre, String apellido, int dni, String mail)
+        {
+            StringBuilder q = new StringBuilder("select nombre, apellido, dni, telefono, mail, direccion, ciudad, fecha_nacimiento " + 
+                " FROM Cliente WHERE 1=1 ", 800);
+            if (!String.IsNullOrEmpty(nombre))
+            {
+                q.Append(" and nombre= '" + nombre +"'");
+            }
+            if (!String.IsNullOrEmpty(apellido))
+            {
+                q.Append(" and apellido = '" + apellido + "'");
+            }
+            if (dni > 0)
+            {
+                q.Append(" and dni = " + dni);
+            }
+            if (!String.IsNullOrEmpty(mail))
+            {
+                q.Append(" and mail = '" + mail + "'");
+            }
+
+            DataTable dt = new DataTable();
+
+            try
+            {
+                Console.WriteLine(q.ToString());
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(q.ToString(), cn);
+                dataAdapter.Fill(dt);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error ejecutando query getClientesByFiltro : " + e.ToString());
+            }
+
+            return dt;
+        }
+
         public void insertProveedor(String razonSocial, String domicilio, String ciudad, String telefono, String cuit, int rubro, String estadoBaja, String mail, String codigoPostal, String contacto)
         {
             long longCodigoPostal = !String.IsNullOrEmpty(codigoPostal) ? Convert.ToInt64(codigoPostal) : 0L;
@@ -565,7 +602,25 @@ namespace FrbaOfertas
 
         public void insertCarga(long monto, String fecha, int tipoPago, int idCliente, long numeroTarjeta)
         {
-            string q = "Insert into FuncionalidadRol(codFuncionalidad,codRol) values ('" + codFuncionalidad + "','" + codRol + "')";
+ //           string q = "Insert into FuncionalidadRol(codFuncionalidad,codRol) values ('" + codFuncionalidad + "','" + codRol + "')";
+ //           try
+ //           {
+ //               Console.WriteLine(q);
+ //               cmd = new SqlCommand(q, cn);
+ //              cmd.ExecuteNonQuery();
+ //           }
+ //           catch (Exception e)
+ //           {
+ //               return false;
+ //           }
+ //           return true;
+        }
+
+        public void insertCliente(String nombre, String apellido, int dni, String telefono, String mail, String direccion, String ciudad, DateTime fechaNacimiento)
+        {
+            int intTelefono = !String.IsNullOrEmpty(telefono) ? Convert.ToInt32(telefono) : 0;
+            string q = "Insert into Cliente(nombre, apellido, dni, telefono, mail, direccion, ciudad, fecha_nacimiento) values ('"
+                + nombre + "','" + apellido + "','" + dni + "'," + intTelefono + ",'" + mail + "', '" + direccion + "', '" + ciudad + "','" + fechaNacimiento + "')";
             try
             {
                 Console.WriteLine(q);
@@ -574,9 +629,26 @@ namespace FrbaOfertas
             }
             catch (Exception e)
             {
-                return false;
+                MessageBox.Show("Error ejecutando query insertCliente : " + e.ToString());
             }
-            return true;
+        }
+
+        public void updateCliente(int dniID, String nombre, String apellido, int dni, String telefono, String mail, String direccion, String ciudad, DateTime fechaNacimiento)
+        {
+            int intTelefono = !String.IsNullOrEmpty(telefono) ? Convert.ToInt32(telefono) : 0;
+            string q = "update Cliente set nombre = '" + nombre + "', apellido = '" + apellido + "', dni = " + dni + 
+                ", telefono =" + intTelefono + ", mail = '" + mail + "', direccion = '" + direccion + "', ciudad = '" + ciudad + 
+                "', fecha_nacimiento = '" + fechaNacimiento + "' WHERE dni = " + dniID;
+            try
+            {
+                Console.WriteLine(q);
+                cmd = new SqlCommand(q, cn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error ejecutando query insertCliente : " + e.ToString());
+            }
         }
 
     }

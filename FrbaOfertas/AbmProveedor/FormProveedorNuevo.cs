@@ -146,5 +146,10 @@ namespace FrbaOfertas.AbmProveedor
                 e.Handled = true;
             }
         }
+
+        private void txtRazonSocial_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

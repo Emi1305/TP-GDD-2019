@@ -57,6 +57,23 @@ CREATE TABLE Rubro
 nombre nvarchar(100),
 PRIMARY KEY (id));
 
+CREATE TABLE TipoPago
+(codigo [numeric](3, 0) not null IDENTITY(1,1),
+descripcion nvarchar(100),
+PRIMARY KEY (codigo));
+
+CREATE TABLE Cliente
+(idCliente [numeric](12, 0) NOT NULL IDENTITY(1,1),
+nombre nvarchar(50) NOT NULL,
+apellido nvarchar(50) NOT NULL,
+direccion nvarchar(100),
+ciudad nvarchar(255),
+telefono [numeric](18, 0),
+mail nvarchar(100) UNIQUE NOT NULL,
+dni nvarchar(8) UNIQUE NOT NULL,
+fecha_nacimiento datetime NOT NULL
+PRIMARY KEY (idCliente));
+
 --Cursores
 
 declare @rubroNombre nvarchar(100)
@@ -100,13 +117,6 @@ OPEN CUR
 	end	
 	CLOSE CUR
 	DEALLOCATE CUR
-	
-	
-	
-CREATE TABLE TipoPago
-(codigo [numeric](3, 0) not null IDENTITY(1,1),
-descripcion nvarchar(100),
-PRIMARY KEY (codigo));
 
 --Cursores
 

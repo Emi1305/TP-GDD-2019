@@ -42,7 +42,8 @@ namespace FrbaOfertas
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            new AbmCliente.FormCliente().Show();
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -79,6 +80,11 @@ namespace FrbaOfertas
             CragaCredito.FormCargaCredito form = new CragaCredito.FormCargaCredito();
             form.Show();
             
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

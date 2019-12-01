@@ -168,6 +168,7 @@
             this.txtRazonSocial.Name = "txtRazonSocial";
             this.txtRazonSocial.Size = new System.Drawing.Size(215, 20);
             this.txtRazonSocial.TabIndex = 12;
+            this.txtRazonSocial.TextChanged += new System.EventHandler(this.txtRazonSocial_TextChanged);
             // 
             // txtDomicilio
             // 

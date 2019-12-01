@@ -34,15 +34,14 @@
             this.label4 = new System.Windows.Forms.Label();
             this.textBox_nombre = new System.Windows.Forms.TextBox();
             this.textBox_apellido = new System.Windows.Forms.TextBox();
-            this.textBox_dni = new System.Windows.Forms.TextBox();
             this.textBox_mail = new System.Windows.Forms.TextBox();
             this.textBox_calle = new System.Windows.Forms.TextBox();
             this.textBox_telefono = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
-            this.lineShape2 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.lineShape2 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.textBox_numero = new System.Windows.Forms.TextBox();
@@ -58,6 +57,8 @@
             this.dtp_fecNacimiento = new System.Windows.Forms.DateTimePicker();
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
+            this.textBox_dni = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.textBox_dni)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -112,13 +113,6 @@
             this.textBox_apellido.Size = new System.Drawing.Size(200, 20);
             this.textBox_apellido.TabIndex = 5;
             // 
-            // textBox_dni
-            // 
-            this.textBox_dni.Location = new System.Drawing.Point(71, 92);
-            this.textBox_dni.Name = "textBox_dni";
-            this.textBox_dni.Size = new System.Drawing.Size(200, 20);
-            this.textBox_dni.TabIndex = 6;
-            // 
             // textBox_mail
             // 
             this.textBox_mail.Location = new System.Drawing.Point(71, 125);
@@ -171,14 +165,6 @@
             this.shapeContainer1.TabIndex = 12;
             this.shapeContainer1.TabStop = false;
             // 
-            // lineShape2
-            // 
-            this.lineShape2.Name = "lineShape2";
-            this.lineShape2.X1 = 18;
-            this.lineShape2.X2 = 155;
-            this.lineShape2.Y1 = 237;
-            this.lineShape2.Y2 = 237;
-            // 
             // lineShape1
             // 
             this.lineShape1.Name = "lineShape1";
@@ -187,6 +173,14 @@
             this.lineShape1.Y1 = 237;
             this.lineShape1.Y2 = 237;
             this.lineShape1.Click += new System.EventHandler(this.lineShape1_Click);
+            // 
+            // lineShape2
+            // 
+            this.lineShape2.Name = "lineShape2";
+            this.lineShape2.X1 = 18;
+            this.lineShape2.X2 = 155;
+            this.lineShape2.Y1 = 237;
+            this.lineShape2.Y2 = 237;
             // 
             // label7
             // 
@@ -319,11 +313,19 @@
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
-            // FormCliente
+            // textBox_dni
+            // 
+            this.textBox_dni.Location = new System.Drawing.Point(71, 92);
+            this.textBox_dni.Name = "textBox_dni";
+            this.textBox_dni.Size = new System.Drawing.Size(200, 20);
+            this.textBox_dni.TabIndex = 29;
+            // 
+            // FormClienteNuevo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(390, 387);
+            this.Controls.Add(this.textBox_dni);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.dtp_fecNacimiento);
@@ -344,7 +346,6 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.textBox_mail);
-            this.Controls.Add(this.textBox_dni);
             this.Controls.Add(this.textBox_apellido);
             this.Controls.Add(this.textBox_nombre);
             this.Controls.Add(this.label4);
@@ -352,9 +353,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.shapeContainer1);
-            this.Name = "FormCliente";
+            this.Name = "FormClienteNuevo";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.FormCliente_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.textBox_dni)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -368,7 +370,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox_nombre;
         private System.Windows.Forms.TextBox textBox_apellido;
-        private System.Windows.Forms.TextBox textBox_dni;
         private System.Windows.Forms.TextBox textBox_mail;
         private System.Windows.Forms.TextBox textBox_calle;
         private System.Windows.Forms.TextBox textBox_telefono;
@@ -392,5 +393,6 @@
         private System.Windows.Forms.DateTimePicker dtp_fecNacimiento;
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Button btnAceptar;
+        private System.Windows.Forms.NumericUpDown textBox_dni;
     }
 }
