@@ -55,10 +55,17 @@ namespace FrbaOfertas.CrearOferta
 
         private void refreshlistaProveedor()
         {
+            //TODO no anda el llenado del combo => no pude probar el insert
             DataSet ds = con.getProveedores();
             comboBox_proveedores.DataSource = ds.Tables[0];
             comboBox_proveedores.ValueMember = "idProveedor";
             comboBox_proveedores.DisplayMember = "razonSocial";
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new Menu().Show();
         }
     }
 }
