@@ -87,5 +87,11 @@ namespace FrbaOfertas
             this.Hide();
             new FrbaOfertas.CrearOferta.FormOferta().Show();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new FrbaOfertas.ComprarOferta.FormComprarOferta().Show();
+        }
     }
 }

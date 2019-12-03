@@ -7,11 +7,14 @@ using System.Data;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace FrbaOfertas
 {
     class Conexion
     {
+        public static String usuarioLogueado;
+
         SqlConnection cn;
         SqlCommand cmd;
         SqlDataReader dr;
@@ -479,6 +482,24 @@ namespace FrbaOfertas
             return ds;
         }
 
+        public DataSet getClientes()
+        {
+            DataSet ds = new DataSet();
+            string q = "select idCliente, concat(apellido,', ', nombre) as nombre_completo from cliente order by nombre_completo";
+            try
+            {
+                Console.WriteLine(q);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(q, cn);
+                dataAdapter.Fill(ds);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error ejecutando query getClientes : " + e.ToString());
+            }
+
+            return ds;
+        }
+
         public DataTable getListaProveedores()
         {
             DataTable dt = new DataTable();
@@ -531,7 +552,7 @@ namespace FrbaOfertas
 
         public DataTable getClientesByFiltro(String nombre, String apellido, int dni, String mail)
         {
-            StringBuilder q = new StringBuilder("select nombre, apellido, dni, telefono, mail, direccion, ciudad, fecha_nacimiento, idCliente " + 
+            StringBuilder q = new StringBuilder("select idCliente, nombre, apellido, dni, telefono, mail, direccion, ciudad, fecha_nacimiento, credito " + 
                 " FROM Cliente WHERE 1=1 ", 800);
             if (!String.IsNullOrEmpty(nombre))
             {
@@ -688,5 +709,81 @@ namespace FrbaOfertas
 
         }
 
+        public DataTable getOfertasVigentes() 
+        {
+            var config = ConfigurationManager.AppSettings;
+            DataTable dt = new DataTable();
+            string q = "SELECT id,descripcion,precio_oferta,precio_lista,cantidad,fecha_publicacion,fecha_vencimiento,id_proveedor " +
+                "FROM OFERTA WHERE CANTIDAD > 0 AND cast('" + config["fecha"] + "' AS datetime) BETWEEN FECHA_PUBLICACION AND FECHA_VENCIMIENTO";
+            try
+            {
+                Console.WriteLine(q);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(q, cn);
+                dataAdapter.Fill(dt);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error ejecutando query getOfertasVigentes : " + e.ToString());
+            }
+
+            return dt;
+        }
+
+        public void updateCreditoCliente(int id, double monto) 
+        {
+            string q = "UPDATE CLIENTE SET CREDITO = CREDITO + " + monto +
+                        " WHERE ID = " + id;
+            try
+            {
+                Console.WriteLine(q);
+                cmd = new SqlCommand(q, cn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error ejecutando query updateCreditoCliente : " + e.ToString());
+            }
+        }
+        
+        public Boolean isSaldoSuficiente(int id, double precio) 
+        {
+            int result = 0;
+            DataSet ds = new DataSet();
+            String q = "SELECT 1 FROM Cliente where idCliente = " + id;
+            try
+            {
+                Console.WriteLine(q);
+                cmd = new SqlCommand(q, cn);
+                var res = cmd.ExecuteScalar();
+                result = res!=null ? ((int) res) : 0;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error ejecutando query isSaldoSuficiente : " + e.ToString());
+            }
+            
+            return result == 1;
+        }
+
+        public void comprarOferta(int idCliente, int idOferta, double precioOferta)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" BEGIN TRANSACTION ");
+                sb.Append(" UPDATE CLIENTE SET CREDITO = (CREDITO - " + precioOferta);
+                    sb.Append(") WHERE IDCLIENTE = " + idCliente);
+                sb.Append("UPDATE OFERTA SET CANTIDAD = (CANTIDAD-1) WHERE ID = " + idOferta);
+            sb.Append(" COMMIT ");
+            String q = sb.ToString();
+            try
+            {
+                Console.WriteLine(q);
+                cmd = new SqlCommand(q, cn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error ejecutando query comprarOferta : " + e.ToString());
+            }
+        }
     }
 }

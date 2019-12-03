@@ -26,6 +26,7 @@ namespace FrbaOfertas
             String pass = textBox_password.Text;
             if (passwordValida(codUsuario,pass) && usuarioDesbloqueado(codUsuario))
             {
+                Conexion.usuarioLogueado = codUsuario;
                 this.Hide();
                 Menu menu = new Menu(this);
                 menu.Show();

@@ -173,6 +173,9 @@
     <EmbeddedResource Include="AbmUsuario\AbmUsuario.resx">
       <DependentUpon>AbmUsuario.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ComprarOferta\FormComprarOferta.resx">
+      <DependentUpon>FormComprarOferta.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CragaCredito\FormCargaCredito.resx">
       <DependentUpon>FormCargaCredito.cs</DependentUpon>
     </EmbeddedResource>

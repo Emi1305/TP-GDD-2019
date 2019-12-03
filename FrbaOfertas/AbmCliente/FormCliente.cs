@@ -55,9 +55,8 @@ namespace FrbaOfertas.AbmCliente
 
         private void FormCliente_Load(object sender, EventArgs e)
         {
-            textBox_dni.Text = "";
+            textBox_dni.Text = ""; //TODO no se carga el grid cuando abre
             DataTable ds = con.getClientesByFiltro("", "", 0, "");
-            ds.Columns.IndexOf("nombre");
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
